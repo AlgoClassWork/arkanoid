@@ -1,6 +1,7 @@
 from pygame import *
 
-window = display.set_mode((500,500))
+window = display.set_mode((700,500))
+display.set_caption('Арканойд')
 
 class GameSprite(sprite.Sprite):
     def __init__(self, img, x, y):
@@ -13,24 +14,22 @@ class GameSprite(sprite.Sprite):
     def reset(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-platform = GameSprite('platform.png', 200, 450)
-ball = GameSprite('ball.png', 200, 300)
+platform = GameSprite('platform.png', 350, 450)
+ball = GameSprite('ball.png', 300, 300)
 
 monsters = sprite.Group()
-start_x, start_y, count = 5, 5, 9
-for i in range(4): 
+start_x, start_y, count = 20, 5, 9
+for i in range(3): 
     y = start_y + (55 * i) 
-    x = start_x + (28 * i) 
+    x = start_x + (35 * i) 
 
     for i in range(count):
         monster = GameSprite('enemy.png', x, y)
         monsters.add(monster)
-        x += 55
+        x += 75
 
     count -= 1
     
-
-
 game = True
 while game:
     for e in event.get():
