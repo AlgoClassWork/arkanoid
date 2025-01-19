@@ -41,4 +41,13 @@ while game:
     ball.reset()
     monsters.draw(window)
 
+    mouse_x, mouse_y = mouse.get_pos()
+    #platform.rect.centerx = mouse_x
+    if mouse_x > platform.rect.centerx:
+        platform.rect.centerx += 3
+    else:
+        platform.rect.centerx -= 3
+    
+
+
     display.update()
