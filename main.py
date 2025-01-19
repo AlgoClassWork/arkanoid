@@ -1,5 +1,10 @@
 from pygame import *
 
+font.init()
+myfont = font.Font(None, 150)
+win_text = myfont.render('WIN',1,(50,250,50))
+lose_text = myfont.render('LOSE',1,(250,50,50))
+
 window = display.set_mode((500,500))
 display.set_caption('Арканойд')
 
@@ -19,6 +24,7 @@ platform = GameSprite('platform.png', 350, 450)
 ball = GameSprite('ball.png', 300, 300)
 speed_x, speed_y = 5, 5
 
+score = 0
 monsters = sprite.Group()
 start_x, start_y, count = 5, 5, 9
 for i in range(3): 
@@ -60,7 +66,14 @@ while game:
         speed_y *= -1
 
     if sprite.spritecollide(ball, monsters, True):
+        score += 1
         speed_y *= -1
+
+    if score > 20:
+        window.blit(win_text, (100,200))
+
+    if ball.rect.y > 500:
+        window.blit(lose_text, (100,200))
 
     display.update()
     clock.tick(60)
