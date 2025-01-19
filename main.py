@@ -9,9 +9,9 @@ window = display.set_mode((500,500))
 display.set_caption('Арканойд')
 
 class GameSprite(sprite.Sprite):
-    def __init__(self, img, x, y):
+    def __init__(self, img, x, y, width, height):
         super().__init__()
-        self.image = image.load(img)
+        self.image = transform.scale(image.load(img), (width, height))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -19,9 +19,9 @@ class GameSprite(sprite.Sprite):
     def reset(self):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-platform = GameSprite('platform.png', 350, 450)
+platform = GameSprite('platform.png', 350, 450, 100, 20)
 
-ball = GameSprite('ball.png', 300, 300)
+ball = GameSprite('ball.png', 300, 300, 20, 20)
 speed_x, speed_y = 5, 5
 
 score = 0
@@ -32,7 +32,7 @@ for i in range(3):
     x = start_x + (28 * i) 
 
     for i in range(count):
-        monster = GameSprite('enemy.png', x, y)
+        monster = GameSprite('enemy.png', x, y, 50, 50)
         monsters.add(monster)
         x += 55
 
