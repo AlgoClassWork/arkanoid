@@ -15,7 +15,9 @@ class GameSprite(sprite.Sprite):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
 platform = GameSprite('platform.png', 350, 450)
+
 ball = GameSprite('ball.png', 300, 300)
+speed_x, speed_y = 1, 1
 
 monsters = sprite.Group()
 start_x, start_y, count = 20, 5, 9
@@ -42,12 +44,16 @@ while game:
     monsters.draw(window)
 
     mouse_x, mouse_y = mouse.get_pos()
-    #platform.rect.centerx = mouse_x
-    if mouse_x > platform.rect.centerx:
-        platform.rect.centerx += 3
-    else:
-        platform.rect.centerx -= 3
-    
+    platform.rect.centerx = mouse_x
+
+    ball.rect.x += speed_x 
+    ball.rect.y += speed_y
+
+    if ball.rect.x > 650 or ball.rect.x < 0:
+        speed_x *= -1
+
+    if sprite.collide_rect(platform,ball) or ball.rect.y < 0:
+        speed_y *= -1
 
 
     display.update()
